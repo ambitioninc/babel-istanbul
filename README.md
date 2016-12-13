@@ -14,6 +14,18 @@
 
 * babel-istanbul is run exactly like istanbul. For specifics on running istanbul, see [istanbul's README](https://github.com/gotwarlost/istanbul/blob/master/README.md).
 
+### Optional configuration
+
+To effectively replace istanbul during the execution of your application, insert the following lines at the top of your file:
+
+```javascript
+require('babel-istanbul');
+require.cache[require.resolve('istanbul')] = require.cache[require.resolve('babel-istanbul')];
+```
+
+This may be needed if you use any 3rd party module that requires istanbul internally, like karma-coverage.
+
+Only do this if you have istanbul in your node_modules folder or `require.resolve('istanbul')` will throw an exception.
 
 ### Special flags
 
